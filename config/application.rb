@@ -19,5 +19,10 @@ module Codemetrics
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    # logger config
+    # 如何取得 app context path ??? Ans: Rails.root
+    config.logger = ActiveSupport::Logger.new(Rails.root + 'log/my_blog.log')
+
   end
 end

@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Codemetrics</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <title>Code Metrics</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true, debug: true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true, debug: true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<!-- Fixed navbar -->
+<%= render 'layouts/header' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12"><%= yield %> </div>
+  </div>
+</div>
 
 </body>
 </html>

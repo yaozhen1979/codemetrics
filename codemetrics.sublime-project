@@ -1,0 +1,22 @@
+{
+    "folders":
+    [
+        {
+            "path": ".",
+            "folder_exclude_patterns": ["backup"]
+        }
+    ],
+    "settings":
+    {
+        "tab_size": 2
+    },
+
+    // TODO:2013.12.09:how to build a rails system ???
+    "build_systems":
+    [
+        {
+            "name": "ruby",
+            "cmd": ["ruby"]
+        }
+    ]
+}
