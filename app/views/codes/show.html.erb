@@ -1,0 +1,18 @@
+<h1>File Info</h1>
+
+<dl class="dl-horizontal">
+  <dt>Code Id</dt>
+  <dd><%= @code.id %></dd>
+  <dt>Code Path</dt>
+  <dd><%= @code.code_path %></dd>
+  <dt>Code File Name</dt>
+  <dd><%= @code.code_name %></dd>
+  <dt>Code File Format</dt>
+  <dd><%= @code.code_fmt %></dd>
+</dl>
+
+<%= raw(@code_content) %>
+
+
+<button type="button" class="btn btn-default"><%= link_to 'Back to list', codes_path %></button>
+

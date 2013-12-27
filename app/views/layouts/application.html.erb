@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Code Metrics</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true, debug: true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true, debug: true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<!-- Fixed navbar -->
-<%= render 'layouts/header' %>
-
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12"><%= yield %> </div>
-  </div>
-</div>
-
-</body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Codemetrics" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Codemetrics" %>">
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag "codes", params[:codes] %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role="main">
+       <%= render 'layouts/messages' %>
+       <%= yield %>
+    </main>
+  </body>
 </html>

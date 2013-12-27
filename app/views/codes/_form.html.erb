@@ -1,0 +1,12 @@
+<%= form_for @code, :html => {:class => '', 'role' => 'form'} do |f| %>
+
+  <div class="form-group">
+    <%= f.label :code_file, 'code file upload' %>
+    <%= f.file_field :code_file, :class => 'form-control' %>
+  </div>
+
+  <%= link_to 'Back to list', codes_path, :class => "btn btn-default", :role => "button" %> 
+
+  <%= f.button '送交', :class => 'btn btn-default' %>
+
+<% end %>

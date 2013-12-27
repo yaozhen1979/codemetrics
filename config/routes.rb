@@ -1,9 +1,11 @@
 Codemetrics::Application.routes.draw do
 
   # get "codes/index"
-  # get "codes/result"
+  # get "codes/create"
   # 
   resources :codes
+
+  root to: "codes#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

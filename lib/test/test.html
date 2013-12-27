@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Document</title>
+<style type="text/css">
+.highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight {
+  color: #faf6e4;
+  background-color: #122b3b;
+}
+.highlight .gl {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #6c8b9f;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #b2fd6d;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .err {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .gr {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .k, .highlight .kd, .highlight .kv {
+  color: #f6dd62;
+  font-weight: bold;
+}
+.highlight .o, .highlight .ow {
+  color: #4df4ff;
+}
+.highlight .p, .highlight .pi {
+  color: #4df4ff;
+}
+.highlight .gd {
+  color: #cc0000;
+}
+.highlight .gi {
+  color: #b2fd6d;
+}
+.highlight .ge {
+  font-style: italic;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gt {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .kc {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gh {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nc {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nd {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .bp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .ne {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .nt {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ld {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ss {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+  color: #fff0a6;
+  font-weight: bold;
+}
+.highlight .se {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .sc {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .si {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .nb {
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #BBBBBB;
+}
+.highlight .nf {
+  color: #a8e1fe;
+}
+.highlight .py {
+  color: #a8e1fe;
+}
+.highlight .na {
+  color: #a8e1fe;
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+<div class="highlight"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre><pre class="lineno">6</pre><pre class="lineno">7</pre><pre class="lineno">8</pre><pre class="lineno">9</pre><pre class="lineno">10</pre><pre class="lineno">11</pre><pre class="lineno">12</pre><pre class="lineno">13</pre><pre class="lineno">14</pre><pre class="lineno">15</pre><pre class="lineno">16</pre><pre class="lineno">17</pre><pre class="lineno">18</pre><pre class="lineno">19</pre><pre class="lineno">20</pre><pre class="lineno">21</pre><pre class="lineno">22</pre><pre class="lineno">23</pre><pre class="lineno">24</pre><pre class="lineno">25</pre><pre class="lineno">26</pre><pre class="lineno">27</pre><pre class="lineno">28</pre><pre class="lineno">29</pre><pre class="lineno">30</pre><pre class="lineno">31</pre><pre class="lineno">32</pre><pre class="lineno">33</pre><pre class="lineno">34</pre><pre class="lineno">35</pre><pre class="lineno">36</pre><pre class="lineno">37</pre><pre class="lineno">38</pre><pre class="lineno">39</pre><pre class="lineno">40</pre><pre class="lineno">41</pre><pre class="lineno">42</pre><pre class="lineno">43</pre><pre class="lineno">44</pre><pre class="lineno">45</pre><pre class="lineno">46</pre><pre class="lineno">47</pre><pre class="lineno">48</pre><pre class="lineno">49</pre><pre class="lineno">50</pre><pre class="lineno">51</pre><pre class="lineno">52</pre><pre class="lineno">53</pre><pre class="lineno">54</pre><pre class="lineno">55</pre><pre class="lineno">56</pre><pre class="lineno">57</pre></td><td class="code"><pre>require <span class="s2">"rouge"</span>
+require <span class="s2">"erb"</span>
+
+<span class="c"># build data class</span>
+
+class Listings
+
+  attr_reader :html
+
+  def initialize<span class="o">(</span> html <span class="o">=</span> <span class="s2">""</span> <span class="o">)</span>
+    @html <span class="o">=</span> html
+  end
+
+  def build<span class="o">(</span>file_path<span class="o">)</span>
+
+    <span class="c"># make some nice lexed html</span>
+    <span class="nb">source</span> <span class="o">=</span> File.read<span class="o">(</span>file_path<span class="o">)</span>
+
+    <span class="c"># formatter = Rouge::Formatters::HTML.new({:css_class =&gt; 'highlight', :line_numbers =&gt; false, </span>
+    <span class="c">#   :inline_theme =&gt; Rouge::Themes::ThankfulEyes.new, :wrap =&gt; true})</span>
+    
+    formatter <span class="o">=</span> Rouge::Formatters::HTML.new<span class="o">({</span>:css_class <span class="o">=</span>&gt; <span class="s1">'highlight'</span>, :line_numbers <span class="o">=</span>&gt; <span class="nb">true</span>, :wrap <span class="o">=</span>&gt; <span class="nb">true</span><span class="o">})</span>
+    
+    lexer <span class="o">=</span> Rouge::Lexers::Shell.new
+    body_content <span class="o">=</span> formatter.format<span class="o">(</span>lexer.lex<span class="o">(</span><span class="nb">source</span><span class="o">))</span>
+
+    <span class="c"># Get some CSS</span>
+    <span class="c"># css_content = Rouge::Themes::ThankfulEyes.render(:scope =&gt; '.highlight')</span>
+    <span class="c"># Base16::Solarized</span>
+    css_content <span class="o">=</span> Rouge::Themes::ThankfulEyes.render<span class="o">(</span>:scope <span class="o">=</span>&gt; <span class="s1">'.highlight'</span><span class="o">)</span>
+
+    b <span class="o">=</span> binding
+    <span class="c"># create and run templates, filling member data variables</span>
+    ERB.new<span class="o">(</span><span class="sh">&lt;&lt;-'END_HTML'.gsub(/^\s+/, ""), 0, "", "@html").result b
+    &lt;!doctype html&gt;
+    &lt;html lang="en"&gt;
+    &lt;head&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+      &lt;%= css_content %&gt;
+    &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;%= body_content %&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+
+    END_HTML
+
+</span>  end
+end
+
+<span class="c"># setup template data</span>
+listings <span class="o">=</span> Listings.new
+listings.build<span class="o">(</span><span class="s1">'rouge_hello_world.rb'</span><span class="o">)</span>
+
+puts listings.html
+</pre></td></tr></tbody></table></div>
+</body>
+</html>
