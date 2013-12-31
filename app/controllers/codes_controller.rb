@@ -1,9 +1,11 @@
 require "rouge"
+require "code_statistics_calculator.rb"
 
 class CodesController < ApplicationController
   
   def index
     @message = 'hello rails'
+    @codes = Code.all
   end
 
   def new
@@ -14,11 +16,16 @@ class CodesController < ApplicationController
     
     @code = Code.find(params[:id])
     # make some nice lexed html
-    source = File.read(Rails.root + @code.code_path)
+    path = Rails.root + @code.code_path
+    source = File.read(path)
     formatter = Rouge::Formatters::HTML.new({:css_class => 'highlight', :line_numbers => true, :wrap => true})
     lexer = Rouge::Lexers::Shell.new
     # @code_css = Rouge::Themes::ThankfulEyes.render(:scope => '.highlight')
     @code_content = formatter.format(lexer.lex(source))
+
+    # 
+    @stat = calculate_directory_statistics(path)
+    logger.debug "Code stats:" + @stat.inspect
 
   end
 
@@ -36,10 +43,34 @@ class CodesController < ApplicationController
     logger.info "saveing..."
 
     if @code.save
+      debugger
       redirect_to @code
     else
       render 'new'
     end
+  end
+
+  def destroy
+    @code = Code.find(params[:id])
+    @code.destroy
+    redirect_to codes_path
+  end
+
+  # TODO:refactor ???
+  def ajax_query
+    
+    logger.info "ajax test"
+    logger.info "params[:code_name]" + params[:code_name]
+    options = {}
+    # 
+    find_options = { 
+          :conditions => [ "LOWER(codes.code_name) LIKE (?)", '%' + params[:code_name].downcase + '%' ], 
+          :order => "codes.id ASC",
+          :limit => 10 }.merge!(options)
+
+    @ajax_codes = Code.find(:all, find_options)
+
+    render json: @ajax_codes
   end
 
   private
@@ -53,9 +84,9 @@ class CodesController < ApplicationController
       logger.info "uploading file..." 
       uploaded_io = params[:code][:code_file]
 
-      # 
       @code.code_name = uploaded_io.original_filename
-      @code.code_fmt = uploaded_io.original_filename.split(".")[1]
+      # @code.code_fmt = uploaded_io.original_filename.split(".")[1]
+      @code.code_fmt = File.extname(uploaded_io.original_filename).sub(/\A\./, '').downcase
 
       # 單檔上傳
       if !uploaded_io.nil?
@@ -74,4 +105,15 @@ class CodesController < ApplicationController
       end
     end
 
+  public
+    def calculate_directory_statistics(path, pattern = /.*\.(rb|js|coffee|java)$/)
+      stats = CodeStatisticsCalculator.new
+      stats.add_by_file_path(path)
+      stats
+    end
+
 end
+
+# test = CodesController.new
+# aaa = test.calculate_directory_statistics("welcome_controller.rb")
+# puts aaa.lines

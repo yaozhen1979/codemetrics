@@ -5,11 +5,10 @@
     <title><%= content_for?(:title) ? yield(:title) : "Codemetrics" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Codemetrics" %>">
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-    <%= stylesheet_link_tag "codes", params[:codes] %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body class="<%= controller.controller_name%>">
     <header>
       <%= render 'layouts/navigation' %>
     </header>

@@ -6,9 +6,17 @@ class CodesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get result" do
-    get :result
+  test "should get show" do
+    # get "show"
     assert_response :success
+  end
+
+  test "test codes routes" do
+    assert_generates("/codes", :controller => "codes", :action => "index")
+  end
+
+  test "test codes ajax route" do
+    assert_generates("/codes/ajax_query", :controller => "codes", :action => "ajax_query", :method => "post")
   end
 
 end

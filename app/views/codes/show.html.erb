@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "codes", params[:codes] %>
+
 <h1>File Info</h1>
 
 <dl class="dl-horizontal">
@@ -9,6 +11,16 @@
   <dd><%= @code.code_name %></dd>
   <dt>Code File Format</dt>
   <dd><%= @code.code_fmt %></dd>
+  
+  <dt>Code lines</dt>
+  <dd><%= @stat.lines %></dd>
+  <dt>Code LOC</dt>
+  <dd><%= @stat.code_lines %></dd>
+  <dt>Code Classes</dt>
+  <dd><%= @stat.classes %></dd>
+  <dt>Code Methods</dt>
+  <dd><%= @stat.methods %></dd>
+
 </dl>
 
 <%= raw(@code_content) %>

@@ -1,6 +1,7 @@
 <%= form_for @code, :html => {:class => '', 'role' => 'form'} do |f| %>
 
   <div class="form-group">
+    <span class="glyphicon glyphicon-cloud-upload"></span>
     <%= f.label :code_file, 'code file upload' %>
     <%= f.file_field :code_file, :class => 'form-control' %>
   </div>

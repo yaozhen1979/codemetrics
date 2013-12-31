@@ -1,3 +1,75 @@
 <h1>Codes#index</h1>
 <p>Find me in app/views/codes/index.html.erb</p>
 <p><%= @message %></p>
+<%= hello_world "tony" %>
+
+<h1>Codes List</h1>
+
+<style>
+  th.info {
+    width: 15%
+  }
+</style>
+
+<script>
+  $(function() {
+    $( "#tags" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "codes/ajax_query",
+          type: "post",
+          dataType: "json",
+          data: {
+            featureClass: "P",
+            style: "full",
+            maxRows: 5,
+            code_name: request.term
+          },
+          success: function(data) {
+            response( $.map( data, function( item ) {
+              return {
+                label: item.code_name,
+                value: item.code_name
+              }
+            }));
+          }
+        });
+      }
+    });
+  });
+</script>
+
+<div class="ui-widget">
+  <label for="tags">File Name: </label>
+  <input id="tags">
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>File Name</th>
+        <th>File Path</th>
+        <th>File Format</th>
+        <th class="info">Info</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @codes.each_with_index do |code, index| %>
+        <tr class="code_list">
+          <td><%= index + 1 %></td>
+          <td><%= code.code_name %></td>
+          <td><%= code.code_path %></td>
+          <td><%= code.code_fmt %></td>
+          <td><%= link_to 'source code', code_path(code), :class => "btn btn-primary btn-sm active", :role => "button" %> 
+                  | <%= link_to 'Delete', code_path(code),
+                      method: :delete, data: { confirm: 'Are you sure?' },  
+                      :class => "btn btn-danger btn-sm active", :role => "button" %></td>
+        </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+</div>

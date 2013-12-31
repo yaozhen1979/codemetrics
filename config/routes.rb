@@ -1,9 +1,19 @@
 Codemetrics::Application.routes.draw do
 
+  get "admin/welcome/index"
+
   # get "codes/index"
   # get "codes/create"
   # 
-  resources :codes
+
+  # get '/patients/:id', to: 'patients#show'
+  post "codes/ajax_query", to: 'codes#ajax_query'
+
+  resources :codes do
+    # member do
+    #   post "ajax_query", to: 'codes#ajax_query'
+    # end
+  end
 
   root to: "codes#index"
 
