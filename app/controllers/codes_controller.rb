@@ -4,8 +4,17 @@ require "code_statistics_calculator.rb"
 class CodesController < ApplicationController
   
   def index
+
     @message = 'hello rails'
-    @codes = Code.all
+    logger.debug "query params:" + params.inspect
+
+    if params[:code_name].nil?
+      @codes = Code.all
+    else
+      # TODO:sql injection ???
+      @codes = Code.where("code_name like ?", '%' + params[:code_name].strip + '%')
+    end
+
   end
 
   def new
