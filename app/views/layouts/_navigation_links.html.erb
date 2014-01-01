@@ -1,8 +1,23 @@
 <%# add navigation links to this file %>
-<li class="active">
+
+<script>
+  $(function(){
+    $( ".mousemove" )
+      .mouseover(function() {
+        // add class to the one we clicked
+        $(this).addClass("active");
+      })
+      .mouseout(function() {
+        //  
+        $(this).removeClass("active");
+      });
+  })
+</script>
+
+<li class="mousemove">
   <%= link_to 'HOME', codes_path %>
 </li>
-<li>
+<li class="mousemove">
   <%= link_to 'UPLOAD FILE', new_code_path %>
 </li>
 <%#

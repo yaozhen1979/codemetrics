@@ -7,12 +7,12 @@ Codemetrics::Application.routes.draw do
   # 
 
   # get '/patients/:id', to: 'patients#show'
-  post "codes/ajax_query", to: 'codes#ajax_query'
+  # post "codes/ajax_query", to: 'codes#ajax_query'
 
   resources :codes do
-    # member do
-    #   post "ajax_query", to: 'codes#ajax_query'
-    # end
+    collection do
+      post "ajax_query"
+    end
   end
 
   root to: "codes#index"

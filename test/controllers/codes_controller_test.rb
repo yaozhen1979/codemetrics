@@ -16,7 +16,7 @@ class CodesControllerTest < ActionController::TestCase
   end
 
   test "test codes ajax route" do
-    assert_generates("/codes/ajax_query", :controller => "codes", :action => "ajax_query", :method => "post")
+    assert_generates("/codes/ajax_query", { :controller => "codes", :action => "ajax_query", :method => "post", :code_name => "my" })
   end
 
 end
