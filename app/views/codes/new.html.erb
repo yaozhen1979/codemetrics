@@ -1,4 +1,18 @@
 <h1>Codes metrics</h1>
 <p>upload code</p>
 
+<script>
+  $(function(){
+
+    $('#new_code').submit(function(){      
+      var file = $('#code_code_file').val();
+      if ($.trim(file) === '') {
+        event.preventDefault();
+        alert('plz upload file !!!');
+      }
+    });
+
+  })
+</script>
+
 <%= render 'form' %>

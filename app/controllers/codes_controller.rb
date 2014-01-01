@@ -50,13 +50,13 @@ class CodesController < ApplicationController
     set_code_file_path(upload_path)
 
     logger.info "saveing..."
-
     if @code.save
-      debugger
+      # debugger
       redirect_to @code
     else
       render 'new'
     end
+
   end
 
   def destroy
@@ -98,7 +98,7 @@ class CodesController < ApplicationController
       @code.code_fmt = File.extname(uploaded_io.original_filename).sub(/\A\./, '').downcase
 
       # 單檔上傳
-      if !uploaded_io.nil?
+      if !uploaded_io.nil? && @code.valid?
         File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file| 
           file.write(uploaded_io.read)
         end
@@ -122,7 +122,3 @@ class CodesController < ApplicationController
     end
 
 end
-
-# test = CodesController.new
-# aaa = test.calculate_directory_statistics("welcome_controller.rb")
-# puts aaa.lines

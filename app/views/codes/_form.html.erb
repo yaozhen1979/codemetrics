@@ -1,13 +1,31 @@
-<%= form_for @code, :html => {:class => '', 'role' => 'form'} do |f| %>
+<div class="row">
+  <div class="col-md-12">
+  <%= form_for @code, :html => {:class => '', 'role' => 'form'} do |f| %>
+    <div class="input-group col-xs-4">
+      <%#= f.label :code_file, 'code file upload', :class => '' %>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-cloud-upload"></span></span>
+      <%= f.file_field :code_file, :class => 'form-control' %>
+    </div>
+    <p class="help-block">File format: rb, java, js, coffee.</p>
 
-  <div class="form-group">
-    <span class="glyphicon glyphicon-cloud-upload"></span>
-    <%= f.label :code_file, 'code file upload' %>
-    <%= f.file_field :code_file, :class => 'form-control' %>
+    <% if @code.errors.any? %>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="alert alert-danger alert-dismissable fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
+            <strong>Error!</strong> 
+            <% @code.errors.full_messages.each do |msg| %>
+              <%= msg %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to 'Back to list', codes_path, :class => "btn btn-default", :role => "button" %> 
+
+    <%= f.button '送交', :class => 'btn btn-primary' %>
+
+  <% end %>
   </div>
-
-  <%= link_to 'Back to list', codes_path, :class => "btn btn-default", :role => "button" %> 
-
-  <%= f.button '送交', :class => 'btn btn-default' %>
-
-<% end %>
+</div>
