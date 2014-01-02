@@ -36,6 +36,10 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 # 
 gem "rouge", "~> 1.3.1"
 
+## Gemfile for Rails 3, Rails 4, Sinatra, and Merb
+gem 'will_paginate', '~> 3.0'
+gem 'bootstrap-will_paginate'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

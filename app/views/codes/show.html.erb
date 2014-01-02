@@ -23,8 +23,12 @@
 
 </dl>
 
-<%= raw(@code_content) %>
-
-
-<button type="button" class="btn btn-default"><%= link_to 'Back to list', codes_path %></button>
-
+<div class="row">
+  <div class="col-md-12">
+  <%= raw(@code_content) %>
+  
+  <br/>
+  <button type="button" class="btn btn-default"><%= link_to 'Back to list', codes_path %></button>
+  
+  </div> 
+</div>

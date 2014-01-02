@@ -47,6 +47,8 @@
 </div>
 <% end %>
 
+<br/>
+
 <div class="table-responsive">
   <table class="table table-hover table-condensed table-bordered">
     <thead>
@@ -77,4 +79,10 @@
   </table>
 </div>
 
-<%# TODO:分頁 ??? %>
+<div class="pagination">
+  <%= will_paginate @codes, :container => false %>
+</div>
+
+<div class="page_info">
+  <%= page_entries_info @codes, :model => 'datas', :html => true %>
+</div>

@@ -9,10 +9,10 @@ class CodesController < ApplicationController
     logger.debug "query params:" + params.inspect
 
     if params[:code_name].nil?
-      @codes = Code.all
+      @codes = Code.all.paginate(:page => params[:page])
     else
       # TODO:sql injection ???
-      @codes = Code.where("code_name like ?", '%' + params[:code_name].strip + '%')
+      @codes = Code.where("code_name like ?", '%' + params[:code_name].strip + '%').paginate(:page => params[:page])
     end
 
   end
