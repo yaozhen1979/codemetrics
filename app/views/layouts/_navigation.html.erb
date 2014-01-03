@@ -14,6 +14,13 @@
       <ul class="nav navbar-nav">
         <%= render 'layouts/navigation_links' %>
       </ul>
+      
+      <% if session[:user_id] %>      
+        <%= button_to 'Logout', logout_path, :method => :delete, :class => "btn btn-default navbar-btn navbar-right" %>
+      <% else %>
+        <%= link_to 'Login', login_path, :class => "btn btn-default navbar-btn navbar-right" %>
+      <% end  %>
+    
     </div>
   </div>
 </div>

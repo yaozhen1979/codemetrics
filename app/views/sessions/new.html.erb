@@ -1,0 +1,25 @@
+<%= stylesheet_link_tag "sessions" %>
+
+<div class="container">
+  
+  <%= form_tag('/login', method: :post, :class => "form-signin", :role => "form") do %>
+    
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <%= text_field_tag :name, params[:name], :class => "form-control", :placeholder => "login name", :required => "required", :autofocus => "autofocus" %>
+    <%= password_field_tag :password, params[:password], :class => "form-control", :placeholder => "password", :required => true %>
+    <%#
+    <label class="checkbox">
+      <input type="checkbox" value="remember-me"> Remember me
+    </label>
+    %>
+    <%# <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> %>
+    
+    <%= button_tag("Sign in", type: 'submit', :class => "btn btn-lg btn-primary btn-block") %>
+
+  <% end %>
+  
+  <% if flash[:alert] %>
+    <p class="text-center text-danger" id="notice"><%= flash[:alert] %></p>
+  <% end %>
+
+</div> <!-- /container -->

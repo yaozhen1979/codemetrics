@@ -20,6 +20,20 @@
 <li class="mousemove">
   <%= link_to 'UPLOAD FILE', new_code_path %>
 </li>
+
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li><%= link_to 'User action', users_path %></li>
+    <%#
+    <li class="divider"></li>
+    <li class="dropdown-header">Nav header</li>
+    <li><a href="#">Separated link</a></li>
+    <li><a href="#">One more separated link</a></li>
+    %>
+  </ul>
+</li>
+
 <%#
 <li><a href="#contact">Contact</a></li>
 <li class="dropdown">

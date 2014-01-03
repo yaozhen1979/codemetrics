@@ -33,8 +33,11 @@ gem 'jbuilder', '~> 1.2'
 # 
 gem 'bootstrap-sass', '~> 3.0.3.0'
 
-# 
+# A pure-ruby code highlighter that is compatible with pygments
 gem "rouge", "~> 1.3.1"
+
+# a code metric tool for rails projects
+gem "rails_best_practices"
 
 ## Gemfile for Rails 3, Rails 4, Sinatra, and Merb
 gem 'will_paginate', '~> 3.0'
@@ -46,7 +49,7 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'

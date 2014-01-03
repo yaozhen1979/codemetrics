@@ -1,10 +1,14 @@
 Codemetrics::Application.routes.draw do
 
-  get "admin/welcome/index"
-
-  # get "codes/index"
-  # get "codes/create"
-  # 
+  get 'admin' => 'admin#index'
+  
+  controller :sessions do
+    get  'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+  
+  resources :users
 
   # get '/patients/:id', to: 'patients#show'
   # post "codes/ajax_query", to: 'codes#ajax_query'
