@@ -1,34 +1,173 @@
 <%= stylesheet_link_tag "codes", params[:codes] %>
 
-<h1>File Info</h1>
+<script>
+  $(function(){
 
-<dl class="dl-horizontal">
-  <dt>Code Id</dt>
-  <dd><%= @code.id %></dd>
-  <dt>Code Path</dt>
-  <dd><%= @code.code_path %></dd>
-  <dt>Code File Name</dt>
-  <dd><%= @code.code_name %></dd>
-  <dt>Code File Format</dt>
-  <dd><%= @code.code_fmt %></dd>
+    // TODO: loading data plugin ???
+    $('#rubocop').click(function(){
+
+      // alert("OH YA !!!");
+      $.ajax({
+          url: "/codes/rubocop_stat",
+          type: "post",
+          dataType: "json",
+          data: {
+            id: '<%= @code.id %>'
+          }
+        }).done(function( data ) {
+          // if ( console && console.log ) {
+          //   console.log( "Sample of data:", data);
+          // }
+          if (data.format !== 'undefined') {
+            alert("We can rubocop the java guys...");
+          } else {
+            showData(data)
+          }
+        });
+
+    });
+
+    var showData = function(json){
+      
+      var data = '';
+      metadata = ' <h4>Ruby File Analysis:</h4> ' +
+        ' <p class="text-left text-info">metadata:</p> ' +
+        ' <dl class="dl-horizontal"> ' + 
+        ' <dt>rubocop_version</dt> ' + 
+        ' <dd>' + json["metadata"]["rubocop_version"] + '</dd> ' +
+        ' <dt>ruby_engine</dt>' + 
+        ' <dd>' + json["metadata"]["ruby_engine"] + '</dd>' +  
+        ' <dt>ruby_version</dt>' + 
+        ' <dd>' + json["metadata"]["ruby_version"] + '</dd>' +
+        ' <dt>ruby_patchlevel</dt>' +  
+        ' <dd>' + json["metadata"]["ruby_patchlevel"] + '</dd>' +
+        ' <dt>ruby_platform</dt> ' +
+        ' <dd>' + json["metadata"]["ruby_platform"] + '</dd>' +
+        ' </dl> ';
+      data += metadata;
+
+      // <p class="text-left text-info">files:../../helloworld.rb</p>
+      // alert(json["files"].length);
+
+      for (var i = 0; i < json["files"].length; i++) {
+        //
+        mainData = "<p class=\"text-left text-info\">file path:" + json["files"][i]["path"] + "</p>";
+        mainData += ' <p class="text-left text-info">offences:</p> ';
+        for (var j = 0; j < json["files"][i]["offences"].length; j++) {
+          mainData += 
+            ' <dl class="dl-horizontal"> ' + 
+            ' <dt>severity</dt> ' + 
+            ' <dd>' + json["files"][i]["offences"][j]["severity"] + '</dd>' +
+            ' <dt>message</dt> ' + 
+            ' <dd>' + json["files"][i]["offences"][j]["message"] + '</dd>' + 
+            ' <dt>cop_name</dt> ' + 
+            ' <dd>' + json["files"][i]["offences"][j]["cop_name"] + '</dd>' + 
+            ' <dt>corrected</dt> ' + 
+            ' <dd>' + json["files"][i]["offences"][j]["corrected"] + '</dd>' + 
+            ' <dt>location</dt>' + 
+            ' <dd>' + 
+            ' line:' + json["files"][i]["offences"][j]["location"]["line"] + 
+            ' , colunm:' + json["files"][i]["offences"][j]["location"]["column"] + 
+            ' </dd> ' + 
+            ' </dl> ';
+        };
+        data += mainData;
+      };
+
+      // summary:\"summary\":{\"offence_count\":3,\"target_file_count\":1,\"inspected_file_count\":1}}"]
+      summaryData =
+        ' <p class="text-left text-info">summary:</p> ' +
+        ' <dl class="dl-horizontal"> ' + 
+        ' <dt>offence_count</dt> ' + 
+        ' <dd>' + json["summary"]["offence_count"] + "</dd>" + 
+        ' <dt>target_file_count</dt> ' +
+        ' <dd>' + json["summary"]["target_file_count"] + "</dd>" + 
+        ' <dt>inspected_file_count</dt>' + 
+        ' <dd>' + json["summary"]["inspected_file_count"] +
+        ' <dl>';
+      data += summaryData;
+      
+      $('div.rubocop_data').empty().html(data);
+    }
+
+  });
+</script>
+
+<div class="container">
+  <h1>File Info</h1>
+
+  <dl class="dl-horizontal">
+    <dt>Code Id</dt>
+    <dd><%= @code.id %></dd>
+    <dt>Code Path</dt>
+    <dd><%= @code.code_path %></dd>
+    <dt>Code File Name</dt>
+    <dd><%= @code.code_name %></dd>
+    <dt>Code File Format</dt>
+    <dd><%= @code.code_fmt %></dd>
+    
+    <dt>Code lines</dt>
+    <dd><%= @stat.lines %></dd>
+    <dt>Code LOC</dt>
+    <dd><%= @stat.code_lines %></dd>
+    <dt>Code Classes</dt>
+    <dd><%= @stat.classes %></dd>
+    <dt>Code Methods</dt>
+    <dd><%= @stat.methods %></dd>
+  </dl>
   
-  <dt>Code lines</dt>
-  <dd><%= @stat.lines %></dd>
-  <dt>Code LOC</dt>
-  <dd><%= @stat.code_lines %></dd>
-  <dt>Code Classes</dt>
-  <dd><%= @stat.classes %></dd>
-  <dt>Code Methods</dt>
-  <dd><%= @stat.methods %></dd>
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-default" id="rubocop">Rubocop !!!</button>
+      <div class="rubocop_data"></div>
+      
+      <%#
+      <div class="xxx">
+        <h4>Ruby File Analysis:</h4>
+        <p class="text-left text-info">metadata:</p>
+        <dl class="dl-horizontal">
+          <dt>rubocop_version</dt>
+          <dd>0.16.0</dd>
+          <dt></dt>
+          <dd></dd>
+        </dl>
+        <p class="text-left text-info">files:../../helloworld.rb</p>
+        <p class="text-left text-info">offences:</p>
+        <dl class="dl-horizontal">
+          <dt>severity</dt>
+          <dd>convention</dd>
+          <dt>message</dt>
+          <dd>refer single-quoted strings when you don't need string interpolation or special symbols.</dd>
+          <dt>cop_name</dt>
+          <dd>StringLiterals</dd>
+          <dt>corrected</dt>
+          <dd>nil</dd>
+          <dt>location</dt>
+          <dd>
+            line:1, colunm:9 <br/>
+            line:3, colunm:15
+          </dd>
+        </dl>
+        <p class="text-left text-info">summary:</p>
+        <dl class="dl-horizontal">
+          <dt>offence_count</dt>
+          <dd>3</dd>
+        </dl>
+      </div>
+      %>
+      
+    </div>
+  </div>
 
-</dl>
-
-<div class="row">
-  <div class="col-md-12">
-  <%= raw(@code_content) %>
-  
   <br/>
-  <button type="button" class="btn btn-default"><%= link_to 'Back to list', codes_path %></button>
-  
-  </div> 
-</div>
+
+  <div class="row">
+    <div class="col-md-12">
+    <%= raw(@code_content) %>
+    
+    <br/>
+    <button type="button" class="btn btn-default"><%= link_to 'Back to list', codes_path %></button>
+    
+    </div> 
+  </div>
+</div

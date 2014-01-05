@@ -16,7 +16,7 @@
     $( "#code_name" ).autocomplete({
       source: function( request, response ) {
         $.ajax({
-          url: "codes/ajax_query",
+          url: "/codes/ajax_query",
           type: "post",
           dataType: "json",
           data: {

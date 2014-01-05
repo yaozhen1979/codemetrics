@@ -37,7 +37,10 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 gem "rouge", "~> 1.3.1"
 
 # a code metric tool for rails projects
-gem "rails_best_practices"
+# gem "rails_best_practices"
+
+# A robust Ruby code analyzer, based on the community Ruby style guide
+gem "rubocop"
 
 ## Gemfile for Rails 3, Rails 4, Sinatra, and Merb
 gem 'will_paginate', '~> 3.0'

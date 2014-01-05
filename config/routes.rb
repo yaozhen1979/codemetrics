@@ -16,6 +16,7 @@ Codemetrics::Application.routes.draw do
   resources :codes do
     collection do
       post "ajax_query"
+      post "rubocop_stat"
     end
   end
 

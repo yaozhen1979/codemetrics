@@ -68,8 +68,7 @@ class CodesController < ApplicationController
   # TODO:refactor ???
   def ajax_query
     
-    logger.info "ajax test"
-    logger.info "params[:code_name]" + params[:code_name]
+    logger.info "params[:code_name]:" + params[:code_name]
     options = {}
     # 
     find_options = { 
@@ -80,6 +79,34 @@ class CodesController < ApplicationController
     @ajax_codes = Code.find(:all, find_options)
 
     render json: @ajax_codes
+  end
+
+  # TODO: ajax to rubocop
+  def rubocop_stat
+    logger.info "params[:id]:" + params[:id]
+    @code = Code.find(params[:id])
+
+    # 
+    if @code.code_fmt == 'rb'
+      file_path = Rails.root.to_s + '/' + @code.code_path
+      logger.info "code_path:" + @code.code_path
+      logger.info "file path:" + file_path
+      output = IO.popen('rubocop -f json ' + file_path) if File.exist?(file_path)
+      # puts output.read
+      json_fmt = output.read
+      rubocop_info = JSON.parse(json_fmt)
+
+      # set json data to code_analysis 
+      # you can use rubocop_info.inspect to present the hash data...
+      logger.info "json:" + rubocop_info.to_json
+      @code.update(code_analysis: rubocop_info.to_json)
+      
+      render json: rubocop_info
+    else
+      logger.info "file fomrmat:" + @code.code_fmt
+      render :json => {:format => @code.code_fmt}
+    end
+
   end
 
   private
@@ -114,7 +141,7 @@ class CodesController < ApplicationController
       end
     end
 
-  public
+  private
     def calculate_directory_statistics(path, pattern = /.*\.(rb|js|coffee|java)$/)
       stats = CodeStatisticsCalculator.new
       stats.add_by_file_path(path)
