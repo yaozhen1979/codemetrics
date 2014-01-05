@@ -8,4 +8,6 @@ the web begins a simple rails app. web functions have
     4. file upload
     5. code preview by gem rouge
     6. single file statistics and uses rake:stats code to do
-    7. .....
+    7. add User admin
+    8. rubocop to ruby code
+    9. ....
