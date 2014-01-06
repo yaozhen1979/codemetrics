@@ -17,3 +17,10 @@
 
 #
 /public/uploads
+
+# ignore ctags and cscope files
+/cscope.files
+/cscope.in.out
+/cscope.out
+/cscope.po.out
+/.tags
