@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
 
   protected
     def authorize
-      if request.format == Mime::HTML 
+      logger.info "request.format:" + request.format
+      if request.format == Mime::HTML || request.format == Mime::JSON
         unless User.find_by(id: session[:user_id])
           redirect_to login_url, notice: "Please log in"
         end
